@@ -16,7 +16,7 @@ class PaymentOperationTest {
 
     @Test
     void formatFrenchPaymentWithoutId() {
-        assertEquals("Product voiture costs 12.0 €",op.formatFrenchPaymentWithId(new Payment(3,1,12, "voiture", LocalDateTime.now())));
+        assertEquals("Product voiture costs 12.0 €",op.formatFrenchPaymentWithoutId(new Payment(3,1,12, "voiture", LocalDateTime.now())));
     }
 
     @Test
@@ -46,7 +46,7 @@ class PaymentOperationTest {
                 new Payment(1,1,10,"",null),
                 new Payment(2,2,40,"",null),
                 new Payment(3,1,1200,"",null)),20);
-        assertEquals(1280, cost);
+        assertEquals(1290, cost);
     }
 
     @Test

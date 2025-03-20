@@ -1,29 +1,34 @@
 package fr.titan.kata;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 public class PaymentOperation {
 
     public String formatFrenchPaymentWithId(Payment p){
-        return "";
+        return format(p, getFct(true));
     }
 
     public String formatFrenchPaymentWithoutId(Payment p){
-        return "";
+        return format(p, getFct(false));
+    }
+
+    private BiFunction<Payment, Boolean,String> getFct(boolean b){
+        return (prd,bb)->String.format("Product %s%s costs %s €",prd.name(), b ? String.format(" (%d)",prd.id()):"", String.format(Locale.FRENCH, "%s", prd.cost()));
     }
 
     private String format(Payment p, BiFunction<Payment, Boolean, String> formatFunction){
-        return "";
+        return formatFunction.apply(p,true);
     }
 
     public double basketCost(List<Payment> payments){
-        return 0;
+        return payments.stream().mapToDouble(p->p.cost()*p.quantity()).reduce(0, Double::sum);
     }
 
     public double countProductWithReduce(List<Payment> payments){
-        return 0;
+        return payments.stream().mapToInt(Payment::quantity).sum();
     }
 
     public String costsAsString(List<Payment> payments, String separator){
